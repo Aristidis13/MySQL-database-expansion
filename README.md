@@ -1,4 +1,4 @@
-# MYSQL_project
+# MYSQL-Database-Expansion
 
 This is a project that is about relational MySQL Database handling.
 A Database about an erecruitment system is given, and you have to add more tables and appropriate information to them.
