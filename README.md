@@ -21,7 +21,7 @@ The files that are showed are these:
 - test Queries.txt : This is a file that contains testing of the triggers above.
 - S_P.txt : This is the implementation of a stored procedure, that accepts as input a job position id and returns two tables one with the ranking of every canddate that applied for the 
 job and the number of his interviews for this particular job. Additionally if the there are candidates that are excluded from the final desision due to personality or another reason are presented in asecond table along with the reason they were disqualified. 
-- Selects.txt : This file contains all the queries that my professor wanted.
+- Selects.txt : This file contains all the SELECT queries that my professor wanted. Pick what you want and ask the database.
 
 To run the files first copy-paste the db_txt file in the MySQL workbench.
 After that run the createAnInsert.txt to extend the database.
