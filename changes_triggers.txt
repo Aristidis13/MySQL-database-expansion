@@ -1,0 +1,186 @@
+DELIMITER #
+CREATE TRIGGER insert_user
+AFTER INSERT ON erecruit.`user`
+FOR EACH ROW
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,type,table_nam)
+VALUES
+(current_user(),now(),"SUCCESS","INSERT",'user');
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER insert_recruiter
+AFTER INSERT ON erecruit.recruiter 
+FOR EACH ROW
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),"SUCCESS","INSERT",'recruiter');
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER insert_candidate
+AFTER INSERT ON erecruit.candidate
+FOR EACH ROW
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),"SUCCESS","INSERT",'candidate');
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER insert_etaireia
+AFTER INSERT ON erecruit.etaireia 
+FOR EACH ROW
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),"SUCCESS","INSERT",'etaireia');
+END #
+DELIMITER ;
+
+DELIMITER #
+CREATE TRIGGER insert_job
+AFTER INSERT ON erecruit.job
+FOR EACH ROW
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),"SUCCESS","INSERT",'job');
+END #
+DELIMITER ;
+
+
+
+/*--------------------------------------	END OF INSERT STATEMENTS	-------------*/
+
+
+DELIMITER #
+CREATE TRIGGER delete_job
+AFTER DELETE ON erecruit.job
+FOR EACH ROW 
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'SUCCESS','DELETE','job');
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER delete_candidate
+AFTER DELETE ON erecruit.candidate
+FOR EACH ROW 
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'SUCCESS','DELETE',"candidate");
+END #
+DELIMITER ;
+
+DELIMITER #
+CREATE TRIGGER delete_user
+AFTER DELETE ON erecruit.`user`
+FOR EACH ROW 
+BEGIN
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'SUCCESS','DELETE',"user");
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER delete_recruiter
+AFTER DELETE ON erecruit.recruiter
+FOR EACH ROW 
+BEGIN
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'SUCCESS','DELETE',"recruiter");
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER delete_etaireia
+AFTER DELETE ON erecruit.etaireia
+FOR EACH ROW 
+BEGIN
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'SUCCESS','DELETE',"etaireia");
+END #
+DELIMITER ;
+
+
+/*------------------------------------------------END OF DELETE STATEMENTS----------------------------------------------------*/
+
+
+DELIMITER #
+CREATE TRIGGER update_user
+AFTER UPDATE ON erecruit.`user`
+FOR EACH ROW
+BEGIN
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'Success','UPDATE',"user");
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER update_job
+AFTER UPDATE ON erecruit.job 
+FOR EACH ROW
+BEGIN
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'Success','UPDATE',"job");
+END #
+DELIMITER ;
+
+
+DELIMITER #
+CREATE TRIGGER update_candidate
+AFTER UPDATE ON erecruit.candidate 
+FOR EACH ROW
+BEGIN
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'Success','UPDATE',"candidate");
+END #
+DELIMITER ;
+
+DELIMITER #
+CREATE TRIGGER update_recruiter
+AFTER UPDATE ON erecruit.recruiter 
+FOR EACH ROW
+BEGIN
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES
+(current_user(),now(),'Success','UPDATE',"recruiter");
+END #
+DELIMITER ;
+
+DELIMITER #
+CREATE TRIGGER update_etaireia
+BEFORE UPDATE ON erecruit.etaireia
+FOR EACH ROW BEGIN
+IF (old.AFM != new.AFM OR OLD.DOY != NEW.DOY OR NEW.`name` != OLD.`name`) THEN
+set new.AFM = old.AFM, new.DOY = old.DOY, new.`name` = OLD.`name`;
+
+INSERT INTO changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES (current_user(),now(),'Failure','UPDATE',"etaireia");
+else
+INSERT INTO erecruit.changes(user_username,date_time,success_state,`type`,table_nam)
+VALUES (current_user(),now(),'Success','UPDATE',"etaireia");
+END IF;
+END #
+DELIMITER ;

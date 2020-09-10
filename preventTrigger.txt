@@ -1,0 +1,12 @@
+DELIMITER #
+CREATE TRIGGER delete_applies
+BEFORE DELETE ON erecruit.applies
+FOR EACH ROW BEGIN
+IF ((SELECT submission_date from job INNER JOIN applies ON applies.job_id=job.id) < curdate()) THEN
+INSERT applies(cand_usrname,job_id)
+values(OLD.cand_usrname,OLD.job_id);
+INSERT erecruit.history(user_username,date_time,success_state,type,table_name)
+VALUES(user(),now(),'Failure','DELETE',table_name);
+END IF;
+END #
+DELIMITER ;

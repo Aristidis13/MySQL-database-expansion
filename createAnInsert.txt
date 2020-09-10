@@ -1,0 +1,78 @@
+CREATE TABLE `erecruit`.`interview`(
+  `i_id` INT(4) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `date_time` DATETIME NOT NULL,
+  `duration` TIME NOT NULL,
+  `comments` TINYTEXT NULL,
+  `personality` TINYINT(1) UNSIGNED NOT NULL,
+  `experience` TINYINT(1) UNSIGNED NOT NULL,
+  `education` TINYINT(1) UNSIGNED NOT NULL,
+  `cand_usrname` VARCHAR(12) NOT NULL,
+  `job_id` INT(4) NOT NULL,
+CONSTRAINT `Applicant`
+    FOREIGN KEY (`cand_usrname`,`job_id`) REFERENCES `erecruit`.`applies`(`cand_usrname`,`job_id`)
+    ON DELETE CASCADE ON UPDATE CASCADE);
+
+
+INSERT INTO erecruit.interview (date_time, duration, comments, personality, experience, education, cand_usrname, job_id )
+VALUES
+('2018-11-08 15:11:50', '00:30:05', "excellent-personality, excellent-experience, excellent-education", 5, 5, 4,"abrown",1),
+('2018-11-08 15:11:50', '00:30:05', "excellent-personality, excellent-experience, excellent-education", 5, 5, 4,"cleogeo", 2),
+('2018-11-07 15:11:50', '00:30:07', "mediocre-personality, excellent-experience, excellent-education,could work well in job", 3, 5, 5,"lionarF",2),
+('2018-11-06 15:11:50', '00:30:00', "bad-personality, excellent-experience, excellent-education,should be re-evaluated", 0, 5, 5,"zazahir23",2),
+('2018-11-06 15:11:50', '00:30:00', "bad-personality, excellent-experience, excellent-education.He does not want it very much", 1, 5, 5,"zazahir23",2),
+('2018-10-25 15:11:58', '00:23:25', "good-personality, excellent-experience, no-education", 4, 5, 0,"lionarF",3),
+('2018-10-28 15:11:56', '00:25:43', "adequate-personality, excellent-experience, adequate-education", 3, 5, 3,"zazahir23",3),
+('2019-10-11 15:11:55', '00:25:46', "not impressive-personality, mediocre-experience, enough-education,interview has not finished", 2, 3, 3,"liagourma",4),
+('2019-10-11 15:11:58', '00:23:22', "bad-personality, good-experience, good-education", 1, 3, 4,"mnikol",4),
+('2019-10-13 15:11:58', '00:23:24', "bad-personality, no-experience, excellent-education", 0, 0, 5,"liagourma",4),
+('2019-10-12 15:11:58', '01:26:24', "good-personality, excellent-experience, adequate-education", 4, 5, 3,"liagourma",4),
+('2018-10-20 15:11:55', '00:25:46', "no-personality, no-experience, enough-education", 0, 0, 3,"mnikol",4),
+('2019-01-08 15:11:59', '00:23:22', "bad-personality, inadequate-experience, no-education", 1, 2, 0,"liagourma",4),
+('2019-01-13 15:11:58', '01:26:24', "good-personality, no-experience, no-education", 1, 0, 0,"lionarF",5),
+('2019-01-29 15:11:58', '00:23:24', "no-personality, no-experience, no-education", 0, 0, 0,"lionarF",5),
+('2018-10-25 15:11:58', '00:23:25', "good-personality, excellent-experience, excellent-education", 4, 5, 5,"lionarF",5),
+('2018-10-28 15:11:56', '00:25:43', "adequate-personality, excellent-experience, adequate-education", 3, 5, 3,"lionarF",6),
+('2019-10-11 15:11:55', '00:25:46', "not impressive-personality, mediocre-experience, enough-education", 3, 3, 3,"liagourma",6),
+('2019-10-11 15:11:55', '00:25:46', "no-personality, mediocre-experience, enough-education", 0, 3, 3,"zazahir23",6),
+('2019-10-11 15:11:55', '00:25:46', "not impressive-personality, no-experience, enough-education", 3, 0, 3,"cleogeo",7),
+('2019-10-11 15:11:55', '00:25:46', "not impressive-personality, mediocre-experience, no-education", 3, 3, 0,"lionarF",7),
+('2018-10-10 15:11:55', '00:25:46', "no-personality, no-experience, no-education,should come again", 0, 0, 0,"zazahir23",7),
+('2018-10-12 15:11:55', '00:25:46', "good-personality, mediocre-experience, little-education", 4, 3, 1,"zazahir23",8),
+('2019-01-11 15:11:55', '00:25:46', "no-personality, no-experience, no-education", 0, 0, 0,"zazahir23",8),
+('2019-02-12 15:11:55', '00:25:46', "good-personality, mediocre-experience, little-education,", 4, 3, 1,"abrown",9),
+('2019-10-11 15:11:58', '00:23:22', "excellent-personality, excellent-experience, excellent-education", 5, 5, 5,"lionarF",9),
+('2018-12-11 15:11:58', '00:23:22', "excellent-personality, excellent-experience, excellent-education", 5, 5, 5,"liagourma",10),
+('2018-12-10 15:11:55', '00:25:46', "no-personality, no-experience, no-education,should come again", 0, 0, 0,"abrown",11),
+('2018-12-12 15:11:55', '00:25:46', "good-personality, mediocre-experience, little-education", 4, 3, 1,"mnikol",11),
+('2018-12-12 19:11:55', '00:25:46', "no-personality, no-experience, no-education", 0, 0, 0,"abrown",11),
+('2019-12-14 15:11:55', '00:25:46', "good-personality, mediocre-experience, little-education,should re-appear", 4, 3, 1,"mnikol",11),
+('2019-12-17 15:11:58', '00:23:22', "excellent-personality, little-experience, no-education", 5, 3, 0,"abrown",11),
+('2018-12-18 15:11:58', '00:23:22', "bad-personality, excellent-experience, excellent-education", 0, 5, 5,"mnikol",11),
+('2018-12-19 15:11:58', '00:23:22', "excellent-personality, little-experience, no-education", 5, 3, 0,"zazahir23",12),
+('2018-12-20 15:11:58', '00:23:22', "bad-personality, excellent-experience, excellent-education", 0, 5, 5,"lionarF",12)
+;
+
+
+CREATE TABLE `erecruit`.`sectors` (
+  `Company_Afm` CHAR(9) NOT NULL,
+  `title` VARCHAR(45) NOT NULL,
+  `description` TINYTEXT NULL,
+  `belongs_to` VARCHAR(45) NULL,
+  PRIMARY KEY (`title`,`Company_Afm`),
+  CONSTRAINT `Company_Afm`
+    FOREIGN KEY (`Company_Afm`)
+    REFERENCES `erecruit`.`etaireia` (`AFM`)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `c3`
+    FOREIGN KEY (`belongs_to`) REFERENCES `erecruit`.`sectors`(`title`)
+    ON DELETE SET NULL ON UPDATE CASCADE);
+
+
+   CREATE TABLE `erecruit`.`changes` (
+  `change_id` INT AUTO_INCREMENT NOT NULL,
+  `user_username` VARCHAR(19) NOT NULL,
+  `date_time` DATETIME NOT NULL,
+  `success_state` ENUM('Success', 'Failure') NOT NULL,
+  `type` ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
+  `table_nam` ENUM('candidate', 'recruiter', 'user', 'etaireia', 'job') NOT NULL,
+  PRIMARY KEY (`change_id`));

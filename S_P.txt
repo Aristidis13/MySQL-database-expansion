@@ -1,0 +1,42 @@
+DELIMITER #
+CREATE PROCEDURE ranking(IN a INT)
+BEGIN
+declare deadline,start1 DATETIME;
+declare str,str1,str2,str3 VARCHAR(60);
+DECLARE finished INTEGER DEFAULT 0;
+SET str1="Not good personality";
+SET str2="Not enough experience";
+SET str3="Not enough education";
+IF ( (a < ( select count(*) from job)+1) and a>0) THEN
+SET @deadline= (select submission_date from job where id=a);
+ SET @start1= (select announce_date from job where id=a);
+    /*IF ((curdate()<@start) and (curdate()>@deadline)) THEN*/
+  SELECT cand_usrname as "Candidate",
+   avg(distinct personality) as "Personality",
+   avg(distinct experience) as "Experience",
+   avg(distinct education) as "Education",
+   avg(distinct education)+avg(distinct experience)+avg(distinct personality)/count(i_id) as "Total",
+   count(i_id) as "Number of Interviews"
+  FROM interview
+  where job_id=a
+  GROUP BY cand_usrname
+  ORDER BY  avg(distinct education)+avg(distinct experience)+avg(distinct personality)/count(i_id) desc;
+
+ SELECT cand_usrname,avg(distinct personality),avg(distinct education),avg(distinct experience)
+ FROM interview
+ WHERE job_id=a
+ group by cand_usrname
+ having avg(distinct personality)=0
+ OR avg(distinct education)=0
+ OR avg(distinct experience)=0;
+
+  /*  else select 'Wrong date ';
+  END IF;*/  
+    else select 'id is not valid';
+ END IF;
+END #
+DELIMITER ;
+
+
+
+call ranking(6);

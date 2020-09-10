@@ -1,0 +1,49 @@
+(a)
+SELECT user.name, user.surname, etaireia.name, job.id, job.salary, count(*) as "Number of Applications"
+FROM applies 
+INNER JOIN job ON job.id=applies.job_id
+INNER JOIN user ON job.recruiter=user.username
+INNER JOIN recruiter ON job.recruiter=recruiter.username
+INNER JOIN etaireia ON etaireia.AFM=recruiter.firm
+GROUP BY job_id
+HAVING job.salary >1900;
+
+(b) 
+SELECT has_degree.cand_usrname, candidate.certificates,
+COUNT(cand_usrname) as "Number of Degrees",
+avg(grade) as "Average Grade"
+FROM has_degree
+INNER JOIN candidate ON has_degree.cand_usrname=candidate.username
+GROUP BY cand_usrname
+HAVING COUNT(cand_usrname) >1 ;
+
+
+(c)
+SELECT applies.cand_usrname,applies.job_id,
+COUNT(job_id) as "Number of Applications for Each Candidate",
+avg(salary) as "Estimated Average Income if candidate worked in all jobs"
+FROM applies
+INNER JOIN job ON applies.job_id = job.id
+GROUP BY cand_usrname
+HAVING AVG(salary)>1800;
+
+(d) /*To etaireia.city to ebala gia dieukolynsh a kai den to zhtouse h askhsh*/
+
+SELECT etaireia.name, job.position, requires.antikeim_title,etaireia.city
+FROM requires
+INNER JOIN job ON requires.job_id=job.id
+INNER JOIN recruiter ON job.recruiter=recruiter.username
+INNER JOIN etaireia ON recruiter.firm=etaireia.AFM
+WHERE requires.antikeim_title LIKE "%Program%"
+AND etaireia.city LIKE "Patra";
+
+(e)
+select  job.recruiter,
+COUNT(DISTINCT id) as "Number of Jobs",
+COUNT(i_id) as "Number of interviews",
+AVG(distinct salary) as "Average Salary"
+FROM job
+INNER JOIN interview on interview.job_id=job.id
+GROUP BY recruiter
+HAVING count(DISTINCT id)>1
+ORDER BY AVG(distinct salary) desc;

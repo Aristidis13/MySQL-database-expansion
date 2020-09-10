@@ -1,0 +1,73 @@
+/*INSERT commands for testing INSERT triggers in tables candidate,recruiter,user,etaireia,job*/
+
+  /*User table*/
+insert into erecruit.`user` (username,`password`,`name`,surname,`reg_date`,email)
+VALUES
+ ("aris13","abar13","Aristidis","Barlos",'2019-07-01 11:23:00',"aris13pat@hotmail.com"),
+ ("george14","gpar14","George","Paraskevopoulos",'2019-02-26 11:54:09',"gpar14@hotmail.com");
+
+  /*etaireia table*/
+insert into erecruit.etaireia (AFM,DOY,`name`,tel,street,num,city,country)
+VALUES('111111111',"C Patras","TheNewCompany",2610657888,"Akth Dymaiwn",15,"Patras","Greece");
+
+  /*recruiter table*/
+insert into erecruit.recruiter(username,exp_years,firm)
+VALUES ('aris13',2,'111111111');
+
+  /*candidate table*/
+insert into erecruit.candidate (username,bio,sistatikes,certificates)
+VALUES ("george14","George has worked everywhere in the world.","AwesomeSistatiki.pdf","certificate.pdf");
+
+  /*job table*/
+insert into erecruit.job (start_date,salary,`position`,edra,recruiter,announce_date,submission_date)
+VALUES('2019-12-1',1500.1,"Data Analyst","Patras, Greece","aris13",'2019-03-01','2019-11-01');
+
+
+
+
+
+/*UPDATE commands for testing UPDATE triggers in tables user,recruiter,candidate,etaireia,job*/
+
+update erecruit.`user`
+SET `password`='aris15'
+where username like "aris13";
+
+update erecruit.candidate
+SET certificates="ggto.pdf"
+where username like "george14";
+
+update erecruit.recruiter
+SET exp_years=exp_years + 1
+where username like "aris13";
+
+update erecruit.job
+SET start_date='2019-11-01',submission_date='2019-10-01'
+WHERE id>12;
+
+update etaireia
+SET tel=2610234556
+WHERE AFM like '111111111';
+
+update erecruit.etaireia
+SET DOY ="111222111"
+WHERE AFM like '111111111';
+
+update erecruit.etaireia
+SET DOY="B Athhnwn"
+WHERE AFM like '111111111';
+
+
+
+/*DELETE commands for testing DELETE triggers in tables user,recruiter,candidate,etaireia,job*/
+
+delete from erecruit.etaireia where AFM like '111111111';
+delete from erecruit.job where id>12 AND position like "Data Analyst";
+delete from erecruit.recruiter where username like "aris13";
+delete from erecruit.candidate where username like "george14";
+delete from erecruit.`user` where username like "aris13" OR username LIKE "george14";
+
+
+
+select * from changes;
+
+
